@@ -26,7 +26,7 @@ export default function ConversationView({ user }) {
     try {
       setLoading(true);
       setError('');
-      const response = await fetch(`http://localhost:5000/api/messages/conversations/${id}`, {
+      const response = await fetch(`https://scoutbookfyp1.onrender.com/api/messages/conversations/${id}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`
         }
@@ -55,7 +55,7 @@ export default function ConversationView({ user }) {
 
     try {
       setSending(true);
-      const response = await fetch(`http://localhost:5000/api/messages/conversations/${id}/messages`, {
+      const response = await fetch(`https://scoutbookfyp1.onrender.com/api/messages/conversations/${id}/messages`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`,

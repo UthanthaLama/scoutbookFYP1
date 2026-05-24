@@ -24,7 +24,7 @@ export default function VerifyEmail({ onLogin }) {
         setMessage('Verifying your email address...');
 
         const response = await axios.get(
-          `http://localhost:5000/api/auth/verify-email/${token}`
+          `https://scoutbookfyp1.onrender.com/api/auth/verify-email/${token}`
         );
 
         // Verification successful

@@ -17,7 +17,7 @@ export default function AdminOpportunities({ user, onLogout }) {
   const loadOpportunities = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/admin/opportunities', {
+      const response = await fetch('https://scoutbookfyp1.onrender.com/api/admin/opportunities', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`
         }
@@ -35,7 +35,7 @@ export default function AdminOpportunities({ user, onLogout }) {
     if (!window.confirm('Are you sure you want to delete this opportunity?')) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/opportunities/${opportunityId}`, {
+      const response = await fetch(`https://scoutbookfyp1.onrender.com/api/admin/opportunities/${opportunityId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`

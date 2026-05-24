@@ -33,7 +33,7 @@ export default function SignIn({ onSignup }) {
     setEmailError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/validate-email', {
+      const response = await fetch('https://scoutbookfyp1.onrender.com/api/auth/validate-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

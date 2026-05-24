@@ -40,7 +40,7 @@ export default function AdminTournaments({ user, onLogout }) {
   const loadTournaments = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/tournaments/admin/all', {
+      const response = await fetch('https://scoutbookfyp1.onrender.com/api/tournaments/admin/all', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`
         }
@@ -59,7 +59,7 @@ export default function AdminTournaments({ user, onLogout }) {
 
     setActionLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/tournaments/${tournamentId}/approve`, {
+      const response = await fetch(`https://scoutbookfyp1.onrender.com/api/tournaments/${tournamentId}/approve`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`
@@ -88,7 +88,7 @@ export default function AdminTournaments({ user, onLogout }) {
 
     setActionLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/tournaments/${selectedTournament.id}/reject`, {
+      const response = await fetch(`https://scoutbookfyp1.onrender.com/api/tournaments/${selectedTournament.id}/reject`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

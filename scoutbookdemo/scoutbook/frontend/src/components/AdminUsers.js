@@ -18,7 +18,7 @@ export default function AdminUsers({ user, onLogout }) {
   const loadUsers = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/admin/users?role=${filter}`, {
+      const response = await fetch(`https://scoutbookfyp1.onrender.com/api/admin/users?role=${filter}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`
         }
@@ -40,7 +40,7 @@ export default function AdminUsers({ user, onLogout }) {
       const subscriptions = {};
       for (const u of usersList) {
         try {
-          const response = await fetch(`http://localhost:5000/api/admin/users/${u.id}/subscriptions`, {
+          const response = await fetch(`https://scoutbookfyp1.onrender.com/api/admin/users/${u.id}/subscriptions`, {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('sb_token')}`
             }
@@ -63,7 +63,7 @@ export default function AdminUsers({ user, onLogout }) {
     if (!window.confirm('Are you sure you want to delete this user?')) return;
 
     try {
-      await fetch(`http://localhost:5000/api/admin/users/${userId}`, {
+      await fetch(`https://scoutbookfyp1.onrender.com/api/admin/users/${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`

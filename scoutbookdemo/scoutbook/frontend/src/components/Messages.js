@@ -16,7 +16,7 @@ export default function Messages({ user }) {
     try {
       setLoading(true);
       console.log('Loading conversations for user:', user);
-      const response = await fetch('http://localhost:5000/api/messages/conversations', {
+      const response = await fetch('https://scoutbookfyp1.onrender.com/api/messages/conversations', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`
         }
@@ -89,7 +89,7 @@ export default function Messages({ user }) {
       console.log('Request body JSON:', JSON.stringify(requestBody));
       console.log('Token:', localStorage.getItem('sb_token'));
       
-      const response = await fetch('http://localhost:5000/api/messages/conversations', {
+      const response = await fetch('https://scoutbookfyp1.onrender.com/api/messages/conversations', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`,

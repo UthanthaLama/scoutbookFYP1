@@ -9,7 +9,7 @@ export default function GoogleLogin({ onSuccess, onError }) {
     // Check if Google OAuth is configured
     const checkGoogleOAuth = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/auth/google/status');
+        const response = await axios.get('https://scoutbookfyp1.onrender.com/api/auth/google/status');
         setIsConfigured(response.data.configured);
       } catch (error) {
         console.error('Error checking Google OAuth status:', error);
@@ -29,7 +29,7 @@ export default function GoogleLogin({ onSuccess, onError }) {
     setLoading(true);
     try {
       // Redirect to Google OAuth
-      window.location.href = 'http://localhost:5000/api/auth/google';
+      window.location.href = 'https://scoutbookfyp1.onrender.com/api/auth/google';
     } catch (error) {
       console.error('Google login error:', error);
       onError('Failed to initiate Google login');

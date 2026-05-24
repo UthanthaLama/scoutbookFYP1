@@ -26,7 +26,7 @@ export default function AdminDashboard({ user, onLogout }) {
   const loadDashboardData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/admin/dashboard', {
+      const response = await fetch('https://scoutbookfyp1.onrender.com/api/admin/dashboard', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('sb_token')}`
         }
