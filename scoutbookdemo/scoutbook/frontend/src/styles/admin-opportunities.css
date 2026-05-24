@@ -1,0 +1,150 @@
+/* Admin Opportunities */
+.admin-opportunities-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Stats */
+.opportunity-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.opportunity-stats .stat-card {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.opportunity-stats .stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.opportunity-stats .stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opportunity-stats .stat-card.all .stat-icon {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+}
+
+.opportunity-stats .stat-card.contract .stat-icon {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+}
+
+.opportunity-stats .stat-card.tryout .stat-icon {
+  background: rgba(251, 146, 60, 0.1);
+  color: #fb923c;
+}
+
+.opportunity-stats .stat-card.scouting .stat-icon {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+}
+
+.opportunity-stats .stat-icon .material-icons {
+  font-size: 1.75rem;
+}
+
+.opportunity-stats .stat-info {
+  flex: 1;
+}
+
+.opportunity-stats .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1E293B;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.opportunity-stats .stat-label {
+  font-size: 0.875rem;
+  color: #64748B;
+}
+
+/* Table Specific Styles */
+.opportunity-title-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.opportunity-title-cell .opp-icon {
+  color: #3B82F6;
+  font-size: 1.25rem;
+}
+
+.opportunity-title-cell .opp-title {
+  font-weight: 600;
+}
+
+.location-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #64748b;
+}
+
+.location-cell .location-icon {
+  font-size: 1rem;
+}
+
+.type-badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.type-badge.contract {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.type-badge.tryout {
+  background: rgba(251, 146, 60, 0.1);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.type-badge.scouting {
+  background: rgba(100, 116, 139, 0.1);
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+.btn-icon.delete:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .opportunity-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .opportunity-stats {
+    grid-template-columns: 1fr;
+  }
+}

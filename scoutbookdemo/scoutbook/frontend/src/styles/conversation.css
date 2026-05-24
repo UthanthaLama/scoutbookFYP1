@@ -1,0 +1,546 @@
+/* ═══════════════════════════════════════════════
+   Messenger-style Conversation UI
+   ═══════════════════════════════════════════════ */
+
+/* Outer wrapper — fills space below site-header */
+.conv-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  background: #f0f2f5;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ── Header ──────────────────────────────────── */
+.conv-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #ffffff;
+  border-bottom: 1px solid #e4e6eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  flex-shrink: 0;
+  height: 64px;
+}
+
+.conv-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #0084ff;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.conv-back-btn:hover { background: #f0f2f5; }
+.conv-back-btn .material-icons { font-size: 1.375rem; }
+
+/* Avatar in header */
+.conv-header-avatar {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0084ff, #0052cc);
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,132,255,0.35);
+}
+
+.conv-online-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #31a24c;
+  border: 2px solid #fff;
+}
+
+.conv-header-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.conv-header-name {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #050505;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conv-header-role {
+  font-size: 0.75rem;
+  color: #65676b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.conv-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f2f5;
+  color: #0084ff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.conv-icon-btn:hover { background: #e4e6eb; }
+.conv-icon-btn .material-icons { font-size: 1.25rem; }
+
+/* ── Messages Area ───────────────────────────── */
+.conv-messages-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  scroll-behavior: smooth;
+}
+
+/* Profile card at top */
+.conv-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 32px;
+  text-align: center;
+}
+
+.conv-profile-card-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0084ff, #0052cc);
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(0,132,255,0.35);
+}
+
+.conv-profile-card-name {
+  margin: 0 0 4px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #050505;
+}
+
+.conv-profile-card-role {
+  margin: 0 0 8px;
+  font-size: 0.8125rem;
+  color: #65676b;
+  font-weight: 500;
+}
+
+.conv-profile-card-note {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #8a8d91;
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+/* Date separator */
+.conv-date-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0 8px;
+}
+
+.conv-date-separator span {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #65676b;
+  background: #e4e6eb;
+  padding: 3px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── KEY FIX: Message row must be full width so
+   own messages can push to the right edge ─────── */
+.conv-message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-bottom: 1px;
+  width: 100%;          /* ← full width so justify-content works */
+}
+
+.conv-message-row.own {
+  flex-direction: row-reverse;
+  justify-content: flex-start; /* bubbles hug the right edge */
+}
+
+.conv-message-row.other {
+  flex-direction: row;
+  justify-content: flex-start; /* bubbles hug the left edge */
+}
+
+/* Avatar beside messages */
+.conv-msg-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0084ff, #0052cc);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.conv-msg-avatar.hidden {
+  visibility: hidden;
+}
+
+/* Bubble wrap — capped width so long text doesn't span full screen */
+.conv-bubble-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: calc(65% - 34px); /* 34px = avatar + gap */
+  gap: 2px;
+}
+
+.conv-message-row.own .conv-bubble-wrap {
+  align-items: flex-end;
+}
+
+.conv-message-row.other .conv-bubble-wrap {
+  align-items: flex-start;
+}
+
+.conv-sender-name {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #65676b;
+  padding: 0 12px;
+  margin-bottom: 2px;
+}
+
+/* Bubble */
+.conv-bubble {
+  padding: 8px 12px;
+  border-radius: 18px;
+  position: relative;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+/* Own bubbles — blue */
+.conv-bubble.own {
+  background: #0084ff;
+  color: #ffffff;
+}
+
+.conv-bubble.own.first.last {
+  border-radius: 18px;
+}
+
+.conv-bubble.own.first:not(.last) {
+  border-radius: 18px 18px 4px 18px;
+}
+
+.conv-bubble.own.last:not(.first) {
+  border-radius: 18px 4px 18px 18px;
+}
+
+.conv-bubble.own:not(.first):not(.last) {
+  border-radius: 18px 4px 4px 18px;
+}
+
+/* Other bubbles — light gray */
+.conv-bubble.other {
+  background: #ffffff;
+  color: #050505;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.conv-bubble.other.first.last {
+  border-radius: 18px;
+}
+
+.conv-bubble.other.first:not(.last) {
+  border-radius: 4px 18px 18px 18px;
+}
+
+.conv-bubble.other.last:not(.first) {
+  border-radius: 18px 18px 18px 4px;
+}
+
+.conv-bubble.other:not(.first):not(.last) {
+  border-radius: 4px 18px 18px 4px;
+}
+
+.conv-bubble-text {
+  font-size: 0.9375rem;
+  white-space: pre-wrap;
+}
+
+/* Timestamp */
+.conv-timestamp {
+  font-size: 0.6875rem;
+  color: #8a8d91;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 4px;
+  margin-top: 2px;
+}
+
+.conv-timestamp.own  { justify-content: flex-end; }
+.conv-timestamp.other { justify-content: flex-start; }
+
+.conv-read-status .material-icons {
+  font-size: 0.875rem;
+  color: #0084ff;
+}
+
+/* No messages */
+.conv-no-messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  color: #8a8d91;
+  gap: 8px;
+}
+
+.conv-no-messages .material-icons { font-size: 3rem; }
+.conv-no-messages p { margin: 0; font-size: 0.9375rem; }
+
+/* ── Input Area ──────────────────────────────── */
+.conv-input-area {
+  background: #ffffff;
+  border-top: 1px solid #e4e6eb;
+  padding: 10px 12px;
+  flex-shrink: 0;
+}
+
+.conv-error-bar {
+  background: #ffebe9;
+  border: 1px solid #f28b82;
+  color: #d93025;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  margin-bottom: 8px;
+}
+
+.conv-input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.conv-attach-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #0084ff;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.conv-attach-btn:hover { background: #f0f2f5; }
+.conv-attach-btn .material-icons { font-size: 1.625rem; }
+
+.conv-textarea-wrap {
+  flex: 1;
+  background: #f0f2f5;
+  border-radius: 20px;
+  padding: 8px 14px;
+  transition: background 0.15s;
+}
+
+.conv-textarea-wrap:focus-within { background: #e4e6eb; }
+
+.conv-textarea-wrap textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  resize: none;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: #050505;
+  line-height: 1.4;
+  min-height: 20px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.conv-textarea-wrap textarea::placeholder { color: #8a8d91; }
+.conv-textarea-wrap textarea:focus { outline: none; }
+
+.conv-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f2f5;
+  color: #8a8d91;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.conv-send-btn.active {
+  background: #0084ff;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,132,255,0.4);
+}
+
+.conv-send-btn.active:hover {
+  background: #0073e6;
+  transform: scale(1.05);
+}
+
+.conv-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.conv-send-btn .material-icons { font-size: 1.125rem; }
+
+/* Disabled conversation bar */
+.conv-disabled-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: #f0f2f5;
+  border-top: 1px solid #e4e6eb;
+  color: #65676b;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.conv-disabled-bar .material-icons { font-size: 1.125rem; color: #8a8d91; }
+.conv-disabled-bar p { margin: 0; }
+
+/* ── Loading / Error states ──────────────────── */
+.conv-loading,
+.conv-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 12px;
+  color: #65676b;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.conv-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e4e6eb;
+  border-top-color: #0084ff;
+  border-radius: 50%;
+  animation: conv-spin 0.8s linear infinite;
+}
+
+@keyframes conv-spin {
+  to { transform: rotate(360deg); }
+}
+
+.conv-error .material-icons { font-size: 3rem; color: #d93025; }
+.conv-error h3 { margin: 0; font-size: 1.0625rem; font-weight: 700; color: #050505; }
+.conv-error p  { margin: 0; font-size: 0.9375rem; }
+
+.conv-error button {
+  margin-top: 8px;
+  padding: 10px 24px;
+  background: #0084ff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.conv-error button:hover { background: #0073e6; }
+
+/* ── Scrollbar ───────────────────────────────── */
+.conv-messages-area::-webkit-scrollbar { width: 6px; }
+.conv-messages-area::-webkit-scrollbar-track { background: transparent; }
+.conv-messages-area::-webkit-scrollbar-thumb { background: #ccd0d5; border-radius: 3px; }
+.conv-messages-area::-webkit-scrollbar-thumb:hover { background: #b0b3b8; }
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 768px) {
+  .conv-wrapper { height: calc(100vh - 64px); }
+  .conv-bubble-wrap { max-width: calc(80% - 34px); }
+  .conv-header-actions { display: none; }
+  .conv-messages-area { padding: 12px 8px; }
+}
+
+/* Avatar Images */
+.conv-header-avatar img,
+.conv-msg-avatar img,
+.conv-profile-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.conv-header-avatar,
+.conv-msg-avatar,
+.conv-profile-card-avatar {
+  overflow: hidden;
+}
+
+
+/* Hide avatar for sent messages */
+.conv-message-row.own .conv-msg-avatar {
+  display: none;
+}

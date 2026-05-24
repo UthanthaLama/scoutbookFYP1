@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Payment Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #f9f9f9;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Hanken Grotesk', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .bento-card {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .bento-card:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="p-4">
+  <!-- Khalti Design -->
+  <main id="khalti-design" style="display: none;" class="max-w-[500px] w-full">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+      <div class="flex justify-center py-6 bg-gray-50 border-b border-gray-100">
+        <div class="text-[#440f79] text-2xl font-bold">Khalti</div>
+      </div>
+      <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-transparent">
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h1 class="text-xl font-bold text-[#440f79] mb-1">Confirm Payment</h1>
+            <p class="text-gray-600 text-sm">Secure Digital Transaction</p>
+          </div>
+          <div class="bg-purple-100 p-3 rounded-xl">
+            <span class="material-symbols-outlined text-[#440f79] text-3xl" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bento-card bg-gray-50 p-3 rounded-lg">
+            <span class="text-gray-500 text-[10px] uppercase tracking-wider mb-1 block">Merchant</span>
+            <span class="font-bold text-gray-900 text-sm">ScoutBook</span>
+          </div>
+          <div class="bento-card bg-gray-50 p-3 rounded-lg">
+            <span class="text-gray-500 text-[10px] uppercase tracking-wider mb-1 block">Transaction ID</span>
+            <span class="font-medium text-gray-900 text-xs" id="khalti-txn">-</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-6 flex flex-col items-center justify-center bg-white">
+        <span class="text-gray-600 text-sm mb-2">Total Amount to Pay</span>
+        <div class="flex items-baseline gap-2">
+          <span class="text-[#440f79] text-lg font-semibold">NPR</span>
+          <span class="text-[#440f79] text-3xl font-bold" id="khalti-amount">0.00</span>
+        </div>
+      </div>
+      <div class="px-6 pb-6 space-y-4">
+        <div class="flex items-center gap-3 p-3 border-2 border-[#440f79] bg-purple-50 rounded-xl">
+          <div class="w-10 h-10 rounded-full bg-[#440f79] flex items-center justify-center">
+            <span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'FILL' 1;">shield</span>
+          </div>
+          <div class="flex-1">
+            <p class="font-bold text-gray-900 text-sm">Khalti Wallet Balance</p>
+            <p class="text-xs text-gray-600">Instant, secure transfer</p>
+          </div>
+          <span class="material-symbols-outlined text-[#440f79]">check_circle</span>
+        </div>
+        <div class="space-y-2">
+          <button onclick="completePayment()" class="w-full h-12 bg-[#440f79] text-white rounded-xl font-bold active:scale-95 transition-transform flex items-center justify-center gap-2 shadow-lg">
+            <span>Confirm Payment</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+          <button onclick="cancelPayment()" class="w-full h-12 bg-transparent text-red-600 rounded-xl font-semibold hover:bg-red-50 active:scale-95 transition-transform">
+            Cancel Transaction
+          </button>
+        </div>
+      </div>
+      <div class="p-3 bg-gray-50 flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-gray-500 text-sm">lock</span>
+        <p class="text-gray-600 text-xs">Secured with 256-bit SSL encryption</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- eSewa Design -->
+  <main id="esewa-design" style="display: none;" class="max-w-md w-full">
+    <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+      <header class="mb-5">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="text-[#60bb46]">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 1L3 5v2h18V5l-9-4zm-8 8v10h2V9H4zm5 0v10h2V9H9zm5 0v10h2V9h-2zm5 0v10h2V9h-2zM2 20v2h20v-2H2z"></path>
+            </svg>
+          </div>
+          <span class="text-xl font-bold text-gray-900">eSewa</span>
+        </div>
+        <h1 class="text-lg font-bold text-gray-900">Complete Your Payment</h1>
+      </header>
+      <section class="bg-gray-50 rounded-lg p-3 mb-4 text-xs">
+        <p class="text-gray-600"><span class="font-bold text-gray-900">Merchant:</span> ScoutBook</p>
+        <p class="text-gray-600"><span class="font-bold text-gray-900">Transaction:</span> <span id="esewa-txn">-</span></p>
+      </section>
+      <section class="bg-gray-50 rounded-lg p-4 mb-4 border border-gray-200">
+        <div class="space-y-2">
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-600">Order ID:</span>
+            <span id="esewa-order" class="text-gray-900 font-mono text-xs">-</span>
+          </div>
+          <hr class="border-gray-200"/>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-600 text-sm">Amount:</span>
+            <span id="esewa-amount" class="text-lg font-bold text-[#60bb46]">NPR 0.00</span>
+          </div>
+          <hr class="border-gray-200"/>
+          <div class="flex justify-between text-sm">
+            <span class="text-gray-600">Method:</span>
+            <span class="text-gray-900 font-bold">eSewa</span>
+          </div>
+        </div>
+      </section>
+      <section class="border-l-4 border-[#60bb46] bg-blue-50 p-3 rounded-r-lg mb-4">
+        <p class="text-xs text-gray-700 leading-relaxed">
+          By clicking "Confirm Payment", you authorize this transaction and agree to the terms of service.
+        </p>
+      </section>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <button onclick="completePayment()" class="flex items-center justify-center gap-1 bg-[#60bb46] hover:bg-[#4ea53a] text-white font-bold py-2.5 px-4 rounded-lg transition text-sm shadow-lg">
+          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+            <path clip-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" fill-rule="evenodd"></path>
+          </svg>
+          Confirm
+        </button>
+        <button onclick="cancelPayment()" class="flex items-center justify-center gap-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-4 rounded-lg transition text-sm shadow-lg">
+          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+            <path clip-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" fill-rule="evenodd"></path>
+          </svg>
+          Cancel
+        </button>
+      </div>
+      <footer class="bg-gray-100 py-2 px-3 rounded-lg flex items-center justify-center gap-2">
+        <svg class="h-4 w-4 text-[#60bb46]" fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+        </svg>
+        <p class="text-[#60bb46] text-xs font-medium">256-bit SSL Secured</p>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Processing -->
+  <div id="processing" style="display: none;" class="bg-white max-w-md w-full rounded-xl shadow-lg p-8 text-center">
+    <div class="inline-block w-12 h-12 border-4 border-gray-200 border-t-purple-600 rounded-full animate-spin mb-4"></div>
+    <h2 class="text-lg font-bold text-gray-900 mb-2">Processing Payment...</h2>
+    <p class="text-gray-600 text-sm">Please do not close this window.</p>
+  </div>
+
+  <!-- Success Overlay - Dynamic color based on payment method -->
+  <div id="successOverlay" class="fixed inset-0 flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-500">
+    <div id="successContent" class="text-center text-white scale-90 transition-transform duration-500">
+      <div class="mb-6">
+        <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+          <span class="material-symbols-outlined text-5xl">check_circle</span>
+        </div>
+        <h2 class="text-3xl font-bold mb-2">Payment Successful!</h2>
+        <p id="success-amount" class="text-xl">NPR 0.00 paid to ScoutBook</p>
+      </div>
+      <p class="text-sm opacity-70">Redirecting to platform...</p>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const pidx = urlParams.get('pidx');
+    const amount = urlParams.get('amount');
+    const orderId = urlParams.get('purchase_order_id');
+    const method = urlParams.get('method');
+    const transactionId = `TXN${Date.now().toString().slice(-10)}`;
+    const amountDisplay = amount ? `NPR ${(amount / 100).toFixed(2)}` : 'NPR 0.00';
+
+    if (method === 'Khalti') {
+      document.getElementById('khalti-design').style.display = 'block';
+      document.getElementById('page-title').textContent = 'Khalti Payment Portal';
+      document.getElementById('khalti-txn').textContent = transactionId;
+      document.getElementById('khalti-amount').textContent = amount ? (amount / 100).toFixed(2) : '0.00';
+    } else {
+      document.getElementById('esewa-design').style.display = 'block';
+      document.getElementById('page-title').textContent = 'eSewa Payment Portal';
+      document.getElementById('esewa-txn').textContent = transactionId;
+      document.getElementById('esewa-order').textContent = orderId || 'N/A';
+      document.getElementById('esewa-amount').textContent = amountDisplay;
+    }
+
+    document.getElementById('success-amount').textContent = amountDisplay + ' paid to ScoutBook';
+
+    function completePayment() {
+      document.getElementById('khalti-design').style.display = 'none';
+      document.getElementById('esewa-design').style.display = 'none';
+      document.getElementById('processing').style.display = 'block';
+
+      setTimeout(() => {
+        document.getElementById('processing').style.display = 'none';
+        const successOverlay = document.getElementById('successOverlay');
+        const successContent = document.getElementById('successContent');
+        
+        // Set background color based on payment method
+        if (method === 'Khalti') {
+          successOverlay.style.backgroundColor = '#440f79'; // Purple for Khalti
+        } else {
+          successOverlay.style.backgroundColor = '#60bb46'; // Green for eSewa
+        }
+        
+        successOverlay.classList.remove('hidden');
+        setTimeout(() => {
+          successOverlay.classList.remove('opacity-0');
+          successContent.classList.remove('scale-90');
+          successContent.classList.add('scale-100');
+          
+          // Show animation for 2 seconds, then redirect to callback for verification
+          setTimeout(() => {
+            const callbackUrl = method === 'Khalti' 
+              ? `http://localhost:3000/payment/khalti/callback?pidx=${pidx}&purchase_order_id=${orderId}&transaction_id=test_txn_${Date.now()}&amount=${amount}&mobile=9800000000`
+              : `http://localhost:3000/payment/esewa/success?oid=${orderId}&amt=${(amount / 100).toFixed(2)}&refId=${pidx}`;
+            
+            window.location.href = callbackUrl;
+          }, 2000);
+        }, 50);
+      }, 1500);
+    }
+
+    function cancelPayment() {
+      if (confirm('Cancel this payment?')) {
+        window.location.href = 'http://localhost:3000/dashboard';
+      }
+    }
+  </script>
+</body>
+</html>

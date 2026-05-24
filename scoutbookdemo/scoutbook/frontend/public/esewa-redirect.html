@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to eSewa...</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .redirect-container {
+      background: white;
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #60bb46;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 30px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1a1a1a;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .esewa-logo {
+      color: #60bb46;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="redirect-container">
+    <div class="esewa-logo">eSewa</div>
+    <div class="spinner"></div>
+    <h2>Redirecting to eSewa</h2>
+    <p>Please wait while we redirect you to eSewa payment gateway...</p>
+    <p style="margin-top: 12px; font-size: 0.9rem; color: #999;">Do not close this window</p>
+  </div>
+
+  <form id="esewaForm" method="POST" action="https://uat.esewa.com.np/epay/main" style="display: none;">
+    <input type="hidden" name="amt" id="amt">
+    <input type="hidden" name="psc" id="psc" value="0">
+    <input type="hidden" name="pdc" id="pdc" value="0">
+    <input type="hidden" name="txAmt" id="txAmt" value="0">
+    <input type="hidden" name="tAmt" id="tAmt">
+    <input type="hidden" name="pid" id="pid">
+    <input type="hidden" name="scd" id="scd">
+    <input type="hidden" name="su" id="su">
+    <input type="hidden" name="fu" id="fu">
+  </form>
+
+  <script>
+    // Get parameters from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Get form data from URL parameters
+    const formData = {
+      amt: urlParams.get('amt'),
+      psc: urlParams.get('psc') || '0',
+      pdc: urlParams.get('pdc') || '0',
+      txAmt: urlParams.get('txAmt') || '0',
+      tAmt: urlParams.get('tAmt'),
+      pid: urlParams.get('pid'),
+      scd: urlParams.get('scd'),
+      su: urlParams.get('su'),
+      fu: urlParams.get('fu')
+    };
+
+    console.log('eSewa Payment Parameters:', formData);
+
+    // Validate required parameters
+    if (!formData.amt || !formData.pid || !formData.scd) {
+      alert('Missing required payment parameters');
+      window.location.href = '/dashboard';
+    }
+
+    // Populate form fields
+    document.getElementById('amt').value = formData.amt;
+    document.getElementById('psc').value = formData.psc;
+    document.getElementById('pdc').value = formData.pdc;
+    document.getElementById('txAmt').value = formData.txAmt;
+    document.getElementById('tAmt').value = formData.tAmt;
+    document.getElementById('pid').value = formData.pid;
+    document.getElementById('scd').value = formData.scd;
+    document.getElementById('su').value = formData.su;
+    document.getElementById('fu').value = formData.fu;
+
+    // Get the form
+    const form = document.getElementById('esewaForm');
+
+    // Submit form after a short delay
+    setTimeout(() => {
+      console.log('Submitting form to eSewa sandbox...');
+      try {
+        form.submit();
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Failed to redirect to eSewa. Please try again.');
+        window.location.href = '/dashboard';
+      }
+    }, 1500);
+  </script>
+</body>
+</html>

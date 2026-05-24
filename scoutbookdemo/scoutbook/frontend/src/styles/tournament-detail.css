@@ -1,0 +1,373 @@
+.tournament-detail-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.tournament-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.tournament-detail-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.format-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: #f0fdf4;
+  color: #15803d;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.tournament-detail-header h1 {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  color: #111827;
+}
+
+.organizer-info {
+  color: #6b7280;
+  margin: 0;
+}
+
+.tournament-detail-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.tournament-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.detail-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.2rem;
+  color: #111827;
+}
+
+.detail-section p {
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.details-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.detail-row {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #6b7280;
+  min-width: 150px;
+}
+
+.detail-value {
+  color: #111827;
+}
+
+.contact-section {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border: 2px solid #86efac;
+  border-radius: 12px;
+  padding: 24px !important;
+}
+
+.registration-button-card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.registration-button-card h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  color: #111827;
+}
+
+.registration-button-card p {
+  color: #6b7280;
+  margin: 0 0 24px 0;
+}
+
+.btn-register-full {
+  padding: 14px 40px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-register-full:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-register-full:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.already-registered-notice,
+.registration-closed-notice,
+.tournament-full-notice {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.already-registered-notice p {
+  color: #10b981;
+  font-weight: 600;
+  margin: 0;
+}
+
+.registration-closed-notice p,
+.tournament-full-notice p {
+  color: #ef4444;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Registration Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 550px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin: 0 0 8px 0;
+  color: #0f172a;
+  font-size: 28px;
+}
+
+.modal-content > p {
+  color: #64748b;
+  margin: 0 0 24px 0;
+  font-size: 15px;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.registration-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.registration-form label {
+  font-weight: 600;
+  color: #334155;
+  font-size: 14px;
+}
+
+.registration-form input,
+.registration-form textarea {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.registration-form input:focus,
+.registration-form textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.registration-form textarea {
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.btn-cancel,
+.btn-submit {
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-cancel {
+  background: white;
+  color: #64748b;
+  border: 2px solid #e2e8f0;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-submit:disabled,
+.btn-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background: #fee2e2;
+  border: 2px solid #ef4444;
+  color: #991b1b;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+/* Loading & Error States */
+.loading-container,
+.error-container {
+  text-align: center;
+  padding: 64px 24px;
+  color: #6b7280;
+}
+
+.error-container {
+  color: #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .tournament-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .tournament-detail-container {
+    padding: 20px;
+  }
+
+  .tournament-hero {
+    padding: 32px 24px;
+  }
+
+  .tournament-hero h1 {
+    font-size: 32px;
+  }
+
+  .tournament-subtitle {
+    font-size: 16px;
+  }
+
+  .tournament-meta-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .detail-card {
+    padding: 20px;
+  }
+
+  .modal-content {
+    padding: 24px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+  }
+}
