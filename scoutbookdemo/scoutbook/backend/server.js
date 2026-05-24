@@ -28,22 +28,27 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
-    // Allow any localhost origin
-    if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+
+    const allowedOrigins = [
+      'https://scoutbookfyp1-1.onrender.com',
+    ];
+
+    if (
+      origin.startsWith('http://localhost:') ||
+      origin.startsWith('http://127.0.0.1:') ||
+      allowedOrigins.includes(origin)
+    ) {
       return callback(null, true);
     }
-    
-    // Reject other origins
+
     callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-app.use(express.json({ limit: '50mb' })); // Increase limit for base64 images
+app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Session configuration for Passport
@@ -52,8 +57,8 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // Set to true in production with HTTPS
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
 
@@ -91,7 +96,6 @@ app.use('*', (req, res) => {
 // Initialize database and start server
 const startServer = async () => {
   try {
-    // Create tables if they don't exist
     console.log('🔄 Initializing database tables...');
     await User.createTable();
     await PasswordReset.createTable();
@@ -102,13 +106,12 @@ const startServer = async () => {
     await Conversation.createTable();
     await Message.createTable();
     console.log('✅ All database tables initialized');
-    
+
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
       console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
       console.log(`🔐 Auth endpoints: http://localhost:${PORT}/api/auth`);
-      console.log(`🗄️  Connected to PostgreSQL database: ${process.env.DB_NAME}`);
-      console.log(`📱 Frontend should be running on: http://localhost:3000`);
+      console.log(`🌐 Frontend URL: ${process.env.FRONTEND_URL}`);
       console.log(`\n🎯 ScoutBook - Sports Talent Discovery Platform`);
     });
   } catch (error) {
